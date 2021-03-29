@@ -1,2 +1,22 @@
-﻿  Interface.cpp
+﻿  Application.cpp
+C:\Users\i15pi\Git\paint\Paint\Paint\stdafx.h(11,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\i15pi\Git\paint\Paint\Paint\Application.cpp(74,59): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\i15pi\Git\paint\Paint\Paint\Application.cpp(74,42): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\Users\i15pi\Git\paint\Paint\Paint\Application.cpp(82,21): warning C4018: '<': signed/unsigned mismatch
   Paint.vcxproj -> C:\Users\i15pi\Git\paint\Paint\Debug\Paint.exe
