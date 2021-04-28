@@ -13,7 +13,7 @@ class Pen : public SceneObject
 	
 public:
 	
-	Pen(sf::Vector2f position, sf::Vector2f lastPostion, bool toDraw);
+	Pen(sf::Vector2f position, sf::Vector2f lastPostion, bool toDraw, sf::Color color);
 	~Pen();
 	void draw(sf::RenderWindow& window);
 

@@ -3,7 +3,9 @@
 #include "Pen.h"
 #include "Interface.h"
 #include "Mouse.h"
+#include "ColorBlock.h"
 class Pen;
+class ColorBlock;
 
 class Application
 {
@@ -16,8 +18,11 @@ public:
 	void run();
 	bool isLeftButtonPressed;
 	bool toDraw;
+	bool ColorChanged;
+	bool outLineIsSet;
 	sf::Vector2f lastPosition;
 	std::vector<Pen> allPenObjects = {};
+	std::vector<ColorBlock> allBlockObject = {};
 	//List list;
 private:
 	void events();

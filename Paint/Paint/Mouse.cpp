@@ -1,6 +1,6 @@
 #include "Mouse.h"
 
-Mouse::Mouse() : type(drawType::Pen)
+Mouse::Mouse() : type(drawType::Pen), color(sf::Color::Blue)
 {
 	sf::Vector2i mousePosition = sf::Mouse::getPosition();
 	this->position = sf::Vector2f(0, 0);
@@ -20,4 +20,14 @@ void Mouse::update(sf::RenderWindow& window)
 sf::Vector2f Mouse::getPosition()
 {
 	return this->position;
+}
+
+void Mouse::setColor(sf::Color color)
+{
+	this->color = color;
+}
+
+sf::Color Mouse::getColor()
+{
+	return this->color;
 }

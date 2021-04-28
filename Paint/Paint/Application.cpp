@@ -3,7 +3,7 @@
 Interface interfaceObject;
 
 Application::Application(const int& windowWidth, const int& windowHeight, const sf::String& windowName)
-	:window(sf::VideoMode(windowWidth, windowHeight), windowName), isLeftButtonPressed(false), lastPosition({0, 0}), toDraw(false)
+	:window(sf::VideoMode(windowWidth, windowHeight), windowName), isLeftButtonPressed(false), lastPosition({0, 0}), toDraw(false), ColorChanged(false), outLineIsSet(false)
 {
 }
 
@@ -15,16 +15,21 @@ Application::~Application()
 void Application::run()
 {
 	//List list;
-	sf::VertexArray cirles(sf::TriangleStrip, 4);
-	
-	
+	//PLAYGROUND
+	//------------------------------------------------------------------------
+
+	allBlockObject.push_back(ColorBlock(sf::Vector2f({ 200, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Yellow));
+	allBlockObject.push_back(ColorBlock(sf::Vector2f({ 240, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Blue));
+	allBlockObject.push_back(ColorBlock(sf::Vector2f({ 280, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Green));
+	allBlockObject.push_back(ColorBlock(sf::Vector2f({ 320, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Red));
+
+	//------------------------------------------------------------------------
     while (window.isOpen())
     {
 		events();
 		updateAll(window);
         window.clear();
 		drawAll(window);
-		window.draw(cirles);
         window.display();
     }
 
@@ -60,6 +65,7 @@ void Application::events()
 			if (event.key.code == sf::Mouse::Left) {
 				isLeftButtonPressed = false;
 				toDraw = false;
+				ColorChanged = false;
 			}
 		}
 	}
@@ -75,9 +81,30 @@ void Application::updateAll(sf::RenderWindow& window)
 	mouse.update(window);
 	sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 	sf::Vector2f actualPosition( mousePosition.x, mousePosition.y );
-	if (isLeftButtonPressed && lastPosition != actualPosition) {
+	for (auto i = 0; i < allBlockObject.size(); i++)
+	{
+		if (allBlockObject[i].isClicked(mouse.getPosition()) && !ColorChanged && isLeftButtonPressed) {
+			mouse.setColor(allBlockObject[i].getColor());
+			//allBlockObject[i].setOutLineColor();
+			std::cout << "KOLOR ZMIENIONY" << std::endl;
+			ColorChanged = true;
+			outLineIsSet = true;
+		}
+		if (ColorChanged && outLineIsSet) {
+			for (auto j = 0; j < allBlockObject.size(); j++) {
+				if (j == i)
+					allBlockObject[j].setOutLineColor();
+				else
+					allBlockObject[j].deleteOutLineColor();
+			}
+			outLineIsSet = false;
+			break;
+		}
+		
+	}
+	if (isLeftButtonPressed && lastPosition != actualPosition && !ColorChanged) {
 		//std::cout << mousePosition.x << " " << mousePosition.y << std::endl;
-		Pen penBlock(sf::Vector2f(mousePosition.x, mousePosition.y), lastPosition, toDraw);
+		Pen penBlock(sf::Vector2f(mousePosition.x, mousePosition.y), lastPosition, toDraw, mouse.getColor());
 		allPenObjects.push_back(penBlock);
 		lastPosition = actualPosition;
 		toDraw = true;
@@ -86,9 +113,14 @@ void Application::updateAll(sf::RenderWindow& window)
 
 void Application::drawAll(sf::RenderWindow& window)
 {
-	interfaceObject.draw(window);
 	for (auto i = 0; i < allPenObjects.size(); i++)
 	{
 		allPenObjects[i].draw(window);
 	}
+	interfaceObject.draw(window);
+	for (auto i = 0; i < allBlockObject.size(); i++)
+	{
+		allBlockObject[i].draw(window);
+	}
+	
 }
