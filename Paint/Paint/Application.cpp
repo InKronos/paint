@@ -3,7 +3,7 @@
 Interface interfaceObject;
 
 Application::Application(const int& windowWidth, const int& windowHeight, const sf::String& windowName)
-	:window(sf::VideoMode(windowWidth, windowHeight), windowName), isLeftButtonPressed(false)
+	:window(sf::VideoMode(windowWidth, windowHeight), windowName), isLeftButtonPressed(false), lastPosition({0, 0}), toDraw(false)
 {
 }
 
@@ -15,13 +15,16 @@ Application::~Application()
 void Application::run()
 {
 	//List list;
-
+	sf::VertexArray cirles(sf::TriangleStrip, 4);
+	
+	
     while (window.isOpen())
     {
 		events();
 		updateAll(window);
         window.clear();
 		drawAll(window);
+		window.draw(cirles);
         window.display();
     }
 
@@ -30,7 +33,7 @@ void Application::run()
 void Application::events()
 {
 	sf::Event event;
-
+	this->window.setFramerateLimit(240);
 	while (this->window.pollEvent(event))
 	{
 
@@ -56,6 +59,7 @@ void Application::events()
 		{
 			if (event.key.code == sf::Mouse::Left) {
 				isLeftButtonPressed = false;
+				toDraw = false;
 			}
 		}
 	}
@@ -68,11 +72,15 @@ void Application::CreateInterface(sf::RenderWindow& window)
 
 void Application::updateAll(sf::RenderWindow& window)
 {
-	if (isLeftButtonPressed) {
-		sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+	mouse.update(window);
+	sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+	sf::Vector2f actualPosition( mousePosition.x, mousePosition.y );
+	if (isLeftButtonPressed && lastPosition != actualPosition) {
 		//std::cout << mousePosition.x << " " << mousePosition.y << std::endl;
-		Pen penBlock(sf::Vector2f(mousePosition.x, mousePosition.y));
+		Pen penBlock(sf::Vector2f(mousePosition.x, mousePosition.y), lastPosition, toDraw);
 		allPenObjects.push_back(penBlock);
+		lastPosition = actualPosition;
+		toDraw = true;
 	}
 }
 

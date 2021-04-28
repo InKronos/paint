@@ -157,7 +157,10 @@
     <ClCompile Include="Interface.cpp" />
     <ClCompile Include="List.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Pen.cpp" />
+    <ClCompile Include="Rectangle.cpp" />
+    <ClCompile Include="SceneObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -165,7 +168,10 @@
     <ClInclude Include="ColorBlock.h" />
     <ClInclude Include="Interface.h" />
     <ClInclude Include="List.h" />
+    <ClInclude Include="Mouse.h" />
     <ClInclude Include="Pen.h" />
+    <ClInclude Include="Rectangle.h" />
+    <ClInclude Include="SceneObject.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
