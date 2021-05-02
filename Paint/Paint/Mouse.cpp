@@ -27,6 +27,16 @@ void Mouse::setColor(sf::Color color)
 	this->color = color;
 }
 
+drawType Mouse::getDrawType()
+{
+	return this->type;
+}
+
+void Mouse::setDrawType(drawType type)
+{
+	this->type = type;
+}
+
 sf::Color Mouse::getColor()
 {
 	return this->color;

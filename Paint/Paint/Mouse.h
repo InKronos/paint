@@ -22,6 +22,8 @@ public:
 	//void drawObjects(sf::)
 	sf::Vector2f getPosition();
 	void setColor(sf::Color color);
+	drawType getDrawType();
+	void setDrawType(drawType type);
 	sf::Color getColor();
 };
 

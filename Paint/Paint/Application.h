@@ -4,6 +4,8 @@
 #include "Interface.h"
 #include "Mouse.h"
 #include "ColorBlock.h"
+#include "FuncionalBlock.h"
+#include "Rectangle.h"
 class Pen;
 class ColorBlock;
 
@@ -20,9 +22,12 @@ public:
 	bool toDraw;
 	bool ColorChanged;
 	bool outLineIsSet;
+	bool RectDrawed;
 	sf::Vector2f lastPosition;
 	std::vector<Pen> allPenObjects = {};
 	std::vector<ColorBlock> allBlockObject = {};
+	std::vector<FuncionalBlock> allFBlockObject = {};
+	std::vector<Rectangle> allRectObjects = {};
 	//List list;
 private:
 	void events();

@@ -16,15 +16,3 @@ sf::Color ColorBlock::getColor()
 {
 	return this->shape.getFillColor();
 }
-
-void ColorBlock::setOutLineColor()
-{
-	this->shape.setOutlineColor(sf::Color::Color(100, 100, 100));
-	std::cout << "jest zaznaczenie" << std::endl;
-}
-
-void ColorBlock::deleteOutLineColor()
-{
-	this->shape.setOutlineColor(this->getColor());
-	std::cout << "nie ma zaznaczenia" << std::endl;
-}

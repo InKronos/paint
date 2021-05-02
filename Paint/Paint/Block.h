@@ -13,6 +13,8 @@ public:
 	Block(sf::Vector2f position, sf::Vector2f size);
 	~Block();
 	bool isClicked(sf::Vector2f mousePosition);
+	void setOutLineColor();
+	void deleteOutLineColor();
 	void draw(sf::RenderWindow& window);
 };
 

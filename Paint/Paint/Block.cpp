@@ -17,6 +17,17 @@ bool Block::isClicked(sf::Vector2f mousePosition)
 	return false;
 }
 
+void Block::setOutLineColor()
+{
+	this->shape.setOutlineColor(sf::Color::Transparent);
+}
+
+void Block::deleteOutLineColor()
+{
+	this->shape.setOutlineColor(this->shape.getFillColor());
+}
+
+
 void Block::draw(sf::RenderWindow& window)
 {
 	window.draw(this->shape);

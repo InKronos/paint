@@ -154,6 +154,7 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="ColorBlock.cpp" />
+    <ClCompile Include="FuncionalBlock.cpp" />
     <ClCompile Include="Interface.cpp" />
     <ClCompile Include="List.cpp" />
     <ClCompile Include="main.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="Application.h" />
     <ClInclude Include="Block.h" />
     <ClInclude Include="ColorBlock.h" />
+    <ClInclude Include="FuncionalBlock.h" />
     <ClInclude Include="Interface.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Mouse.h" />
