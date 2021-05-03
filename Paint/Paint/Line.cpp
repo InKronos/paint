@@ -30,7 +30,6 @@ void Line::update(sf::Vector2f mousePosition)
 		
 		degrees = atan(x / y) * 180 / PI;
 	}
-	std::cout << degrees << std::endl;
 	
 	if (mousePosition.x - startingPosition.x < 0 && mousePosition.y - startingPosition.y <= 0) {
 		if (degrees == 0)
@@ -48,6 +47,5 @@ void Line::update(sf::Vector2f mousePosition)
 
 		degrees += 180;
 	}
-	std::cout << degrees << std::endl;
 	line.setRotation(degrees);
 }

@@ -12,6 +12,6 @@ public:
 	~Rectangle();
 
 	void draw(sf::RenderWindow& window);
-	void update(sf::Vector2f mousePosition);
+	void update(sf::Vector2f mousePosition, bool isShiftPressed);
 };
 

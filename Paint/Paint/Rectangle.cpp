@@ -16,8 +16,39 @@ void Rectangle::draw(sf::RenderWindow& window)
 	window.draw(this->rect);
 }
 
-void Rectangle::update(sf::Vector2f mousePosition) 
+void Rectangle::update(sf::Vector2f mousePosition, bool isShiftPressed)
 {
-	this->rect.setSize({ mousePosition.x - this->startingPostion.x, mousePosition.y - this->startingPostion.y });
+	if (isShiftPressed) {
+		if (mousePosition.x - this->startingPostion.x > 0) {
+			if (mousePosition.y - this->startingPostion.y > 0) {
+				if (mousePosition.y - this->startingPostion.y > mousePosition.x - this->startingPostion.x) 
+					this->rect.setSize({ mousePosition.y - this->startingPostion.y, mousePosition.y - this->startingPostion.y });
+				else
+					this->rect.setSize({ mousePosition.x - this->startingPostion.x, mousePosition.x - this->startingPostion.x });
+			}
+			else {
+				if (-(mousePosition.y - this->startingPostion.y) > mousePosition.x - this->startingPostion.x)
+					this->rect.setSize({ -(mousePosition.y - this->startingPostion.y), mousePosition.y - this->startingPostion.y });
+				else
+					this->rect.setSize({ mousePosition.x - this->startingPostion.x, -(mousePosition.x - this->startingPostion.x) });
+			}
+		}
+		else {
+			if (mousePosition.y - this->startingPostion.y > 0) {
+				if (mousePosition.y - this->startingPostion.y > -(mousePosition.x - this->startingPostion.x))
+					this->rect.setSize({ -(mousePosition.y - this->startingPostion.y), mousePosition.y - this->startingPostion.y });
+				else
+					this->rect.setSize({ mousePosition.x - this->startingPostion.x, -(mousePosition.x - this->startingPostion.x) });
+			}
+			if (mousePosition.y - this->startingPostion.y < 0) {
+				if (-(mousePosition.y - this->startingPostion.y) > -(mousePosition.x - this->startingPostion.x))
+					this->rect.setSize({ mousePosition.y - this->startingPostion.y, mousePosition.y - this->startingPostion.y });
+				else
+					this->rect.setSize({ mousePosition.x - this->startingPostion.x, -(mousePosition.x - this->startingPostion.x) });
+			}
+		}
+	}
+	else
+		this->rect.setSize({ mousePosition.x - this->startingPostion.x, mousePosition.y - this->startingPostion.y });
 	//std::cout << "Wielkosc X: " << mousePosition.x - this->startingPostion.x << " Wielkoœæ Y: " <<
 }

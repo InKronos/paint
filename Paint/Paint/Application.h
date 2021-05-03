@@ -7,13 +7,11 @@
 #include "Block.cpp"
 #include "Rectangle.h"
 #include "Line.h"
+#include "Circle.h"
 
 class Pen;
-class ColorBlock;
 class SceneObject;
 
-template<class T>
-class Block;
 
 class Application
 {
@@ -25,6 +23,7 @@ public:
 	~Application();
 	void run();
 	bool isLeftButtonPressed;
+	bool isShiftPressed;
 	bool toDraw;
 	bool ColorChanged;
 	bool outLineIsSet;
@@ -34,6 +33,7 @@ public:
 	std::vector<BaseBlock*> allBlockObject = {};
 	std::vector<Rectangle> allRectObjects = {};
 	std::vector<Line> allLineObjects = {};
+	std::vector<Circle> allCircleObjects = {};
 	//List list;
 private:
 	void events();
