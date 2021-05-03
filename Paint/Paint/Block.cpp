@@ -1,34 +1,26 @@
 #include "Block.h"
 
-Block::Block(sf::Vector2f position, sf::Vector2f size) : size(size), position(position)
+template<class T>
+Block<T>::Block(sf::Vector2f position, sf::Vector2f size, sf::Color color, T uniqueAttribute_) 
+	: BaseBlock( position, size, color), uniqueAttribute(uniqueAttribute_)
 {
-	shape.setSize(size);
-	shape.setPosition(position);
+	
 }
 
-Block::~Block()
+template<class T>
+Block<T>::~Block()
 {
-}
-
-bool Block::isClicked(sf::Vector2f mousePosition)
-{
-	if (mousePosition.x > this->position.x && mousePosition.y > this->position.y && mousePosition.x < (this->position.x + this->size.x) && mousePosition.y < (this->position.y + this->size.y))
-		return true;
-	return false;
-}
-
-void Block::setOutLineColor()
-{
-	this->shape.setOutlineColor(sf::Color::Transparent);
-}
-
-void Block::deleteOutLineColor()
-{
-	this->shape.setOutlineColor(this->shape.getFillColor());
 }
 
 
-void Block::draw(sf::RenderWindow& window)
+template<class T>
+void Block<T>::setUniqueAttribute(T uniqueAttribute_)
 {
-	window.draw(this->shape);
+	this->uniqueAttribute = uniqueAttribute_;
+}
+
+template<class T>
+T Block<T>::getUniqueAttribute()
+{
+	return this->uniqueAttribute;
 }

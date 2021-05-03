@@ -18,16 +18,19 @@ void Application::run()
 	//List list;
 	//PLAYGROUND
 	//------------------------------------------------------------------------
-
-	allBlockObject.push_back(ColorBlock(sf::Vector2f({ 200, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Yellow));
-	allBlockObject.push_back(ColorBlock(sf::Vector2f({ 240, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Blue));
-	allBlockObject[1].setOutLineColor();
-	allBlockObject.push_back(ColorBlock(sf::Vector2f({ 280, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Green));
-	allBlockObject.push_back(ColorBlock(sf::Vector2f({ 320, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Red));
-	allFBlockObject.push_back(FuncionalBlock(sf::Vector2f({ 20, 10 }), sf::Vector2f({ 30, 30 }), drawType::Pen));
-	allFBlockObject[0].setOutLineColor();
-	allFBlockObject.push_back(FuncionalBlock(sf::Vector2f({ 60, 10 }), sf::Vector2f({ 30, 30 }), drawType::Rectangle));
-	std::cout << "TYP ZMIENIONY " << static_cast<std::underlying_type<drawType>::type>(allFBlockObject[1].getDrawType()) << std::endl;
+	
+	//SceneObject* blok1 = new Block<sf::Color>(sf::Vector2f({ 200, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Yellow, sf::Color::Yellow);
+	allBlockObject.push_back(new Block<sf::Color>(sf::Vector2f({ 200, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Yellow, sf::Color::Yellow));
+	std::cout << typeid(Block<sf::Color>).name() << std::endl;
+	allBlockObject.push_back(new Block<sf::Color>(sf::Vector2f({ 240, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Blue, sf::Color::Blue));
+	allBlockObject[1]->setOutLineColor();
+	allBlockObject.push_back(new Block<sf::Color>(sf::Vector2f({ 280, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Green, sf::Color::Green));
+	allBlockObject.push_back(new Block<sf::Color>(sf::Vector2f({ 320, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Red, sf::Color::Red));
+	allBlockObject.push_back(new Block<drawType>(sf::Vector2f({ 20, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Black, drawType::Pen));
+	allBlockObject[4]->setOutLineColor();
+	allBlockObject.push_back(new Block<drawType>(sf::Vector2f({ 60, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::White, drawType::Rectangle));
+	//allBlockObject.push_back(blok1);
+	//std::cout << typeid(allBlockObject[0]).name() << std::endl;
 
 	//------------------------------------------------------------------------
     while (window.isOpen())
@@ -86,48 +89,37 @@ void Application::CreateInterface(sf::RenderWindow& window)
 void Application::updateAll(sf::RenderWindow& window)
 {
 	mouse.update(window);
-	//sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-	//sf::Vector2f actualPosition( mousePosition.x, mousePosition.y );
 	for (auto i = 0; i < allBlockObject.size(); i++)
 	{
-		if (allBlockObject[i].isClicked(mouse.getPosition()) && !ColorChanged && isLeftButtonPressed) {
-			mouse.setColor(allBlockObject[i].getColor());
-			//allBlockObject[i].setOutLineColor();
-			std::cout << "KOLOR ZMIENIONY" << std::endl;
-			ColorChanged = true;
-			outLineIsSet = true;
+		if (allBlockObject[i]->isClicked(mouse.getPosition()) && !ColorChanged && isLeftButtonPressed) {
+			if (typeid(*allBlockObject[i]) == typeid(Block<sf::Color>)) {
+				Block<sf::Color> *clicedBlock = (Block<sf::Color>*) allBlockObject[i];
+				mouse.setColor(clicedBlock->getUniqueAttribute());
+				std::cout << "KOLOR ZMIENIONY" << std::endl;
+				ColorChanged = true;
+				outLineIsSet = true;
+			}
+			else if (typeid(*allBlockObject[i]) == typeid(Block<drawType>)) {
+				Block<drawType>* clicedBlock = (Block<drawType>*) allBlockObject[i];
+				mouse.setDrawType(clicedBlock->getUniqueAttribute());
+				std::cout << "TYP ZMIENIONY" << std::endl;
+				ColorChanged = true;
+				outLineIsSet = true;
+			}
 		}
 		if (ColorChanged && outLineIsSet) {
 			for (auto j = 0; j < allBlockObject.size(); j++) {
-				if (j == i)
-					allBlockObject[j].setOutLineColor();
-				else
-					allBlockObject[j].deleteOutLineColor();
+				if (typeid(*allBlockObject[i]) == typeid(*allBlockObject[j])) {
+					if (j == i)
+						allBlockObject[j]->setOutLineColor();
+					else
+						allBlockObject[j]->deleteOutLineColor();
+				}
 			}
 			outLineIsSet = false;
 			break;
 		}
 		
-	}
-	for (auto i = 0; i < allFBlockObject.size(); i++)
-	{
-		if (allFBlockObject[i].isClicked(mouse.getPosition()) && !ColorChanged && isLeftButtonPressed) {
-			mouse.setDrawType(allFBlockObject[i].getDrawType());
-			std::cout << "TYP ZMIENIONY " << static_cast<std::underlying_type<drawType>::type>(allFBlockObject[i].getDrawType()) << std::endl;
-			ColorChanged = true;
-			outLineIsSet = true;
-		}
-		if (ColorChanged && outLineIsSet) {
-			for (auto j = 0; j < allFBlockObject.size(); j++) {
-				if (j == i)
-					allFBlockObject[j].setOutLineColor();
-				else
-					allFBlockObject[j].deleteOutLineColor();
-			}
-			outLineIsSet = false;
-			break;
-		}
-
 	}
 	if (mouse.getDrawType() == drawType::Pen)
 	{
@@ -163,14 +155,8 @@ void Application::drawAll(sf::RenderWindow& window)
 	interfaceObject.draw(window);
 	for (auto i = 0; i < allBlockObject.size(); i++)
 	{
-		allBlockObject[i].draw(window);
+		allBlockObject[i]->draw(window);
 	}
-	
-	for (auto i = 0; i < allFBlockObject.size(); i++)
-	{
-		allFBlockObject[i].draw(window);
-	}
-	
 	
 	
 }

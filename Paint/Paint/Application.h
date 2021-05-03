@@ -3,11 +3,17 @@
 #include "Pen.h"
 #include "Interface.h"
 #include "Mouse.h"
-#include "ColorBlock.h"
-#include "FuncionalBlock.h"
+#include "Block.h"
+#include "Block.cpp"
 #include "Rectangle.h"
+
+
 class Pen;
 class ColorBlock;
+class SceneObject;
+
+template<class T>
+class Block;
 
 class Application
 {
@@ -25,8 +31,7 @@ public:
 	bool RectDrawed;
 	sf::Vector2f lastPosition;
 	std::vector<Pen> allPenObjects = {};
-	std::vector<ColorBlock> allBlockObject = {};
-	std::vector<FuncionalBlock> allFBlockObject = {};
+	std::vector<BaseBlock*> allBlockObject = {};
 	std::vector<Rectangle> allRectObjects = {};
 	//List list;
 private:

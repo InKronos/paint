@@ -24,9 +24,6 @@
     <ClCompile Include="Block.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ColorBlock.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="List.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -45,7 +42,7 @@
     <ClCompile Include="Mouse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FuncionalBlock.cpp">
+    <ClCompile Include="BaseBlock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -57,9 +54,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Block.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ColorBlock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="List.h">
@@ -80,7 +74,7 @@
     <ClInclude Include="Mouse.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FuncionalBlock.h">
+    <ClInclude Include="BaseBlock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

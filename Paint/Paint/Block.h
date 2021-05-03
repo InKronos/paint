@@ -1,20 +1,17 @@
 #pragma once
 #include "stdafx.h"
 #include "SceneObject.h"
+#include "BaseBlock.h"
 
-class Block : public SceneObject
+template <class T>
+class Block : public BaseBlock
 {
-protected:
-	sf::RectangleShape shape;
-	sf::Vector2f position;
-	sf::Vector2f size;
-
+private:
+	T uniqueAttribute;
 public:
-	Block(sf::Vector2f position, sf::Vector2f size);
+	Block(sf::Vector2f position, sf::Vector2f size, sf::Color color, T uniqueAttribute_);
 	~Block();
-	bool isClicked(sf::Vector2f mousePosition);
-	void setOutLineColor();
-	void deleteOutLineColor();
-	void draw(sf::RenderWindow& window);
+	void setUniqueAttribute(T uniqueAttribute_);
+	T getUniqueAttribute();
 };
 
