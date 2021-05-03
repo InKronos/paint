@@ -4,7 +4,9 @@
 enum class drawType
 {
 	Pen,
-	Rectangle
+	Rectangle,
+	Circle,
+	Line
 };
 
 

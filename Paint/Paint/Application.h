@@ -6,7 +6,7 @@
 #include "Block.h"
 #include "Block.cpp"
 #include "Rectangle.h"
-
+#include "Line.h"
 
 class Pen;
 class ColorBlock;
@@ -33,6 +33,7 @@ public:
 	std::vector<Pen> allPenObjects = {};
 	std::vector<BaseBlock*> allBlockObject = {};
 	std::vector<Rectangle> allRectObjects = {};
+	std::vector<Line> allLineObjects = {};
 	//List list;
 private:
 	void events();

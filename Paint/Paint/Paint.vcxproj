@@ -154,7 +154,9 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="BaseBlock.cpp" />
     <ClCompile Include="Block.cpp" />
+    <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Interface.cpp" />
+    <ClCompile Include="Line.cpp" />
     <ClCompile Include="List.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mouse.cpp" />
@@ -166,7 +168,9 @@
     <ClInclude Include="Application.h" />
     <ClInclude Include="BaseBlock.h" />
     <ClInclude Include="Block.h" />
+    <ClInclude Include="Circle.h" />
     <ClInclude Include="Interface.h" />
+    <ClInclude Include="Line.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Pen.h" />

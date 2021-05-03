@@ -29,6 +29,7 @@ void Application::run()
 	allBlockObject.push_back(new Block<drawType>(sf::Vector2f({ 20, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Black, drawType::Pen));
 	allBlockObject[4]->setOutLineColor();
 	allBlockObject.push_back(new Block<drawType>(sf::Vector2f({ 60, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::White, drawType::Rectangle));
+	allBlockObject.push_back(new Block<drawType>(sf::Vector2f({ 100, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Color(200, 200, 200), drawType::Line));
 	//allBlockObject.push_back(blok1);
 	//std::cout << typeid(allBlockObject[0]).name() << std::endl;
 
@@ -139,6 +140,15 @@ void Application::updateAll(sf::RenderWindow& window)
 			allRectObjects[allRectObjects.size() - 1].update(mouse.getPosition());
 		}
 	}
+	if (mouse.getDrawType() == drawType::Line) {
+		if (!toDraw && isLeftButtonPressed) {
+			toDraw = true;
+			allLineObjects.push_back(Line(mouse.getPosition(), mouse.getColor()));
+		}
+		if (toDraw) {
+			allLineObjects[allLineObjects.size() - 1].update(mouse.getPosition());
+		}
+	}
 	
 }
 
@@ -151,6 +161,10 @@ void Application::drawAll(sf::RenderWindow& window)
 	for (auto i = 0; i < allRectObjects.size(); i++)
 	{
 		allRectObjects[i].draw(window);
+	}
+	for (auto i = 0; i < allLineObjects.size(); i++)
+	{
+		allLineObjects[i].draw(window);
 	}
 	interfaceObject.draw(window);
 	for (auto i = 0; i < allBlockObject.size(); i++)
