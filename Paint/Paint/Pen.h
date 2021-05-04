@@ -8,13 +8,14 @@ class SceneObject;
 
 class Pen : public SceneObject
 {
-	sf::CircleShape rectPen;
-	sf::VertexArray betweenCircle;
-	
+	std::vector<sf::VertexArray> allPenObjects;
+	sf::Vector2f lastposition;
+	sf::Color color;
 public:
 	
-	Pen(sf::Vector2f position, sf::Vector2f lastPostion, bool toDraw, sf::Color color);
+	Pen(sf::Vector2f position, sf::Color color);
 	~Pen();
+	void update(sf::Vector2f mousePosition);
 	void draw(sf::RenderWindow& window);
 
 };

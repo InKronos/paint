@@ -21,17 +21,18 @@ void Application::run()
 
 	
 	//SceneObject* blok1 = new Block<sf::Color>(sf::Vector2f({ 200, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Yellow, sf::Color::Yellow);
-	allBlockObject.push_back(new Block<sf::Color>(sf::Vector2f({ 200, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Yellow, sf::Color::Yellow));
+	allBlockObject.push_back(new Block<sf::Color>(sf::Vector2f({ 300, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Yellow, sf::Color::Yellow));
 	std::cout << typeid(Block<sf::Color>).name() << std::endl;
-	allBlockObject.push_back(new Block<sf::Color>(sf::Vector2f({ 240, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Blue, sf::Color::Blue));
+	allBlockObject.push_back(new Block<sf::Color>(sf::Vector2f({ 340, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Blue, sf::Color::Blue));
 	allBlockObject[1]->setOutLineColor();
-	allBlockObject.push_back(new Block<sf::Color>(sf::Vector2f({ 280, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Green, sf::Color::Green));
-	allBlockObject.push_back(new Block<sf::Color>(sf::Vector2f({ 320, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Red, sf::Color::Red));
+	allBlockObject.push_back(new Block<sf::Color>(sf::Vector2f({ 380, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Green, sf::Color::Green));
+	allBlockObject.push_back(new Block<sf::Color>(sf::Vector2f({ 420, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Red, sf::Color::Red));
 	allBlockObject.push_back(new Block<drawType>(sf::Vector2f({ 20, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Black, drawType::Pen));
 	allBlockObject[4]->setOutLineColor();
 	allBlockObject.push_back(new Block<drawType>(sf::Vector2f({ 60, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::White, drawType::Rectangle));
 	allBlockObject.push_back(new Block<drawType>(sf::Vector2f({ 100, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Color(200, 200, 200), drawType::Line));
 	allBlockObject.push_back(new Block<drawType>(sf::Vector2f({ 140, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Magenta, drawType::Circle));
+	allBlockObject.push_back(new Block<drawType>(sf::Vector2f({ 180, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Cyan, drawType::Brush));
 	//allBlockObject.push_back(blok1);
 	//std::cout << typeid(allBlockObject[0]).name() << std::endl;
 
@@ -76,7 +77,6 @@ void Application::events()
 		if (event.type == sf::Event::KeyReleased)
 		{
 			if (event.key.code == sf::Keyboard::LShift) {
-				std::cout << "Pressed Shift" << std::endl;
 				isShiftPressed = false;
 			}
 		}
@@ -145,11 +145,22 @@ void Application::updateAll(sf::RenderWindow& window)
 	
 	if (mouse.getDrawType() == drawType::Pen)
 	{
-		if (isLeftButtonPressed && lastPosition != mouse.getPosition() && !ColorChanged) {
-			Pen penBlock(mouse.getPosition(), lastPosition, toDraw, mouse.getColor());
-			allPenObjects.push_back(penBlock);
-			lastPosition = mouse.getPosition();
+		if (!toDraw && isLeftButtonPressed) {
 			toDraw = true;
+			allPenObjects.push_back(Pen(mouse.getPosition(), mouse.getColor()));
+		}
+		if (toDraw) {
+			allPenObjects.back().update(mouse.getPosition());
+		}
+	}
+	if (mouse.getDrawType() == drawType::Brush)
+	{
+		if (!toDraw && isLeftButtonPressed) {
+			toDraw = true;
+			allBrushObjects.push_back(Brush(mouse.getPosition(), mouse.getColor()));
+		}
+		if (toDraw) {
+			allBrushObjects.back().update(mouse.getPosition());
 		}
 	}
 	if (mouse.getDrawType() == drawType::Rectangle) {
@@ -199,6 +210,10 @@ void Application::drawAll(sf::RenderWindow& window)
 	for (auto i = 0; i < allCircleObjects.size(); i++)
 	{
 		allCircleObjects[i].draw(window);
+	}
+	for (auto i = 0; i < allBrushObjects.size(); i++)
+	{
+		allBrushObjects[i].draw(window);
 	}
 	interfaceObject.draw(window);
 	for (auto i = 0; i < allBlockObject.size(); i++)

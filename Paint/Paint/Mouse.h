@@ -6,7 +6,8 @@ enum class drawType
 	Pen,
 	Rectangle,
 	Circle,
-	Line
+	Line,
+	Brush
 };
 
 

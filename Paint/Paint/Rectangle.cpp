@@ -3,8 +3,10 @@
 Rectangle::Rectangle(sf::Vector2f mousePosition, sf::Color color) : startingPostion(mousePosition)
 {
 	this->rect.setSize(sf::Vector2f({ 1, 1 }));
-	this->rect.setPosition(mousePosition);
+	this->rect.setPosition(sf::Vector2f(mousePosition.x - 5, mousePosition.y - 5));
 	this->rect.setFillColor(color);
+	this->rect.setOutlineThickness(5);
+	this->rect.setOutlineColor(sf::Color::White);
 }
 
 Rectangle::~Rectangle()

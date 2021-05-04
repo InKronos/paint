@@ -1,10 +1,11 @@
 #include "Line.h"
-#include <tgmath.h>
+
 #define PI 3.14159265
+
 Line::Line(sf::Vector2f mousePosition, sf::Color color)
 	: startingPosition(mousePosition)
 {
-	line.setPosition(mousePosition);
+	line.setPosition(sf::Vector2f(mousePosition.x, mousePosition.y));
 	line.setSize({ 1, 1 });
 	line.setFillColor(color);
 }

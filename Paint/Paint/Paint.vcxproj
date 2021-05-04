@@ -154,6 +154,7 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="BaseBlock.cpp" />
     <ClCompile Include="Block.cpp" />
+    <ClCompile Include="Brush.cpp" />
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Interface.cpp" />
     <ClCompile Include="Line.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="Application.h" />
     <ClInclude Include="BaseBlock.h" />
     <ClInclude Include="Block.h" />
+    <ClInclude Include="Brush.h" />
     <ClInclude Include="Circle.h" />
     <ClInclude Include="EllipseShape.h" />
     <ClInclude Include="Interface.h" />
