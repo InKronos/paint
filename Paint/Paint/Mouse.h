@@ -17,7 +17,8 @@ private:
 	sf::Vector2f position;
 	drawType type;
 	sf::Color color;
-
+	int thickness;
+	bool addFillColor;
 public:
 	Mouse();
 	~Mouse();
@@ -28,5 +29,11 @@ public:
 	drawType getDrawType();
 	void setDrawType(drawType type);
 	sf::Color getColor();
+	void changeThickness(int thickness);
+	int getThickness();
+	void setAddFillColor(bool fillColor);
+	bool getAddFillColor();
+	
+
 };
 

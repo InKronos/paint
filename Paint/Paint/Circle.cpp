@@ -1,11 +1,17 @@
 #include "Circle.h"
 
-Circle::Circle(sf::Vector2f mousePosition, sf::Color color)
+Circle::Circle(sf::Vector2f mousePosition, sf::Color color, int thickness, bool addFillColor)
 	: startingPosition(mousePosition)
 {
 	this->circle.setRadius(sf::Vector2f({ 1, 1 }));
 	this->circle.setPosition(mousePosition);
-	this->circle.setFillColor(color);
+	if (addFillColor)
+		this->circle.setFillColor(color);
+	else
+		this->circle.setFillColor(sf::Color::Transparent);
+
+	this->circle.setOutlineColor(color);
+	this->circle.setOutlineThickness(thickness);
 }
 
 Circle::~Circle()

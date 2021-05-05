@@ -1,7 +1,7 @@
 #include "Brush.h"
 
-Brush::Brush(sf::Vector2f position, sf::Color color)
-	: lastPosition(position), color(color)
+Brush::Brush(sf::Vector2f position, sf::Color color, int thickness)
+	: lastPosition(position), color(color), thickness(thickness)
 {
 	//sf::CircleShape circle(2.5);
 	//circle.setPosition(position);
@@ -15,9 +15,9 @@ Brush::~Brush()
 
 void Brush::update(sf::Vector2f mousePosition)
 {
-	Line betweenCircle(lastPosition, this->color);
-	sf::CircleShape circle(2.5);
-	circle.setPosition(sf::Vector2f(mousePosition.x -5, mousePosition.y -5));
+	Line betweenCircle(lastPosition, this->color, this->thickness);
+	sf::CircleShape circle(this->thickness/2);
+	circle.setPosition(sf::Vector2f(mousePosition.x, mousePosition.y));
 	circle.setFillColor(color);
 	betweenCircle.update(mousePosition);
 	this->lastPosition = mousePosition;

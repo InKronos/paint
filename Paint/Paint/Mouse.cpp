@@ -1,6 +1,7 @@
 #include "Mouse.h"
 
-Mouse::Mouse() : type(drawType::Pen), color(sf::Color::Blue)
+Mouse::Mouse()
+	: type(drawType::Pen), color(sf::Color::Blue), thickness(3), addFillColor(false)
 {
 	sf::Vector2i mousePosition = sf::Mouse::getPosition();
 	this->position = sf::Vector2f(0, 0);
@@ -13,7 +14,6 @@ Mouse::~Mouse()
 void Mouse::update(sf::RenderWindow& window)
 {
 	sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
-	//std::cout << mousePosition.x << " " << mousePosition.y << std::endl;
 	this->position = sf::Vector2f(mousePosition.x, mousePosition.y);
 }
 
@@ -41,3 +41,29 @@ sf::Color Mouse::getColor()
 {
 	return this->color;
 }
+
+void Mouse::changeThickness(int thickness)
+{
+	this->thickness += thickness;
+	if (this->thickness > 15)
+		this->thickness = 15;
+	else if (this->thickness < 2)
+		this->thickness = 2;
+}
+
+int Mouse::getThickness()
+{
+	return this->thickness;
+}
+
+void Mouse::setAddFillColor(bool fillColor)
+{
+	this->addFillColor = fillColor;
+}
+
+bool Mouse::getAddFillColor()
+{
+	return this->addFillColor;
+}
+
+

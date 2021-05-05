@@ -1,2 +1,16 @@
-﻿  Circle.cpp
+﻿  Application.cpp
+C:\Users\i15pi\Git\paint\Paint\Paint\Application.cpp(114,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\i15pi\Git\paint\Paint\Paint\Application.cpp(153,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\i15pi\Git\paint\Paint\Paint\Application.cpp(220,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\i15pi\Git\paint\Paint\Paint\Application.cpp(224,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\i15pi\Git\paint\Paint\Paint\Application.cpp(228,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\i15pi\Git\paint\Paint\Paint\Application.cpp(232,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\i15pi\Git\paint\Paint\Paint\Application.cpp(236,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\i15pi\Git\paint\Paint\Paint\Application.cpp(241,21): warning C4018: '<': signed/unsigned mismatch
+  Block.cpp
+  Circle.cpp
+C:\Users\i15pi\Git\paint\Paint\Paint\Circle.cpp(14,35): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Rectangle.cpp
+C:\Users\i15pi\Git\paint\Paint\Paint\Rectangle.cpp(11,33): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
   Paint.vcxproj -> C:\Users\i15pi\Git\paint\Paint\Debug\Paint.exe

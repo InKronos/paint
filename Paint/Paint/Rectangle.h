@@ -8,7 +8,7 @@ private:
 	sf::RectangleShape rect;
 	sf::Vector2f startingPostion;
 public:
-	Rectangle(sf::Vector2f mousePosition, sf::Color color);
+	Rectangle(sf::Vector2f mousePosition, sf::Color color, int thickness, bool addFillColor);
 	~Rectangle();
 
 	void draw(sf::RenderWindow& window);

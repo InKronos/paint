@@ -20,21 +20,23 @@ void Application::run()
 	//------------------------------------------------------------------------
 
 	
-	//SceneObject* blok1 = new Block<sf::Color>(sf::Vector2f({ 200, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Yellow, sf::Color::Yellow);
-	allBlockObject.push_back(new Block<sf::Color>(sf::Vector2f({ 300, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Yellow, sf::Color::Yellow));
+	allBlockObject.push_back(new Block<sf::Color>(sf::Vector2f({ 640, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Yellow, sf::Color::Yellow));
 	std::cout << typeid(Block<sf::Color>).name() << std::endl;
-	allBlockObject.push_back(new Block<sf::Color>(sf::Vector2f({ 340, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Blue, sf::Color::Blue));
+	allBlockObject.push_back(new Block<sf::Color>(sf::Vector2f({ 680, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Blue, sf::Color::Blue));
 	allBlockObject[1]->setOutLineColor();
-	allBlockObject.push_back(new Block<sf::Color>(sf::Vector2f({ 380, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Green, sf::Color::Green));
-	allBlockObject.push_back(new Block<sf::Color>(sf::Vector2f({ 420, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Red, sf::Color::Red));
+	allBlockObject.push_back(new Block<sf::Color>(sf::Vector2f({ 720, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Green, sf::Color::Green));
+	allBlockObject.push_back(new Block<sf::Color>(sf::Vector2f({ 760, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Red, sf::Color::Red));
 	allBlockObject.push_back(new Block<drawType>(sf::Vector2f({ 20, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Black, drawType::Pen));
 	allBlockObject[4]->setOutLineColor();
 	allBlockObject.push_back(new Block<drawType>(sf::Vector2f({ 60, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::White, drawType::Rectangle));
 	allBlockObject.push_back(new Block<drawType>(sf::Vector2f({ 100, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Color(200, 200, 200), drawType::Line));
 	allBlockObject.push_back(new Block<drawType>(sf::Vector2f({ 140, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Magenta, drawType::Circle));
 	allBlockObject.push_back(new Block<drawType>(sf::Vector2f({ 180, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Cyan, drawType::Brush));
-	//allBlockObject.push_back(blok1);
-	//std::cout << typeid(allBlockObject[0]).name() << std::endl;
+
+	allBlockObject.push_back(new Block<int>(sf::Vector2f({ 300, 10 }), sf::Vector2f({ 8, 30 }), sf::Color::Color(50, 50, 50), -1));
+	allBlockObject.push_back(new Block<int>(sf::Vector2f({ 316, 10 }), sf::Vector2f({ 8, 30 }), sf::Color::Color(50, 50, 50), 1));
+
+	allBlockObject.push_back(new Block<bool>(sf::Vector2f({ 340, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Color(50, 200, 50), false));
 
 	//------------------------------------------------------------------------
     while (window.isOpen())
@@ -126,6 +128,26 @@ void Application::updateAll(sf::RenderWindow& window)
 					ColorChanged = true;
 					outLineIsSet = true;
 				}
+				else if (typeid(*allBlockObject[i]) == typeid(Block<int>)) {
+					Block<int>* clicedBlock = (Block<int>*) allBlockObject[i];
+					mouse.changeThickness(clicedBlock->getUniqueAttribute());
+					std::cout << "GROBOSC ZMIENIONA " << mouse.getThickness() << std::endl;
+					break;
+				}
+				else if (typeid(*allBlockObject[i]) == typeid(Block<bool>)) {
+					Block<bool>* clicedBlock = (Block<bool>*) allBlockObject[i];
+					if (clicedBlock->getUniqueAttribute() == true) {
+						clicedBlock->deleteOutLineColor();
+						clicedBlock->setUniqueAttribute(false);	
+					}
+					else {
+						clicedBlock->setOutLineColor();
+						clicedBlock->setUniqueAttribute(true);
+					}
+					mouse.setAddFillColor(clicedBlock->getUniqueAttribute());
+					std::cout << "WYPELNIENIE ZMIENIONE " << clicedBlock->getUniqueAttribute() << std::endl;
+					break;
+				}
 			}
 			if (ColorChanged && outLineIsSet) {
 				for (auto j = 0; j < allBlockObject.size(); j++) {
@@ -157,7 +179,7 @@ void Application::updateAll(sf::RenderWindow& window)
 	{
 		if (!toDraw && isLeftButtonPressed) {
 			toDraw = true;
-			allBrushObjects.push_back(Brush(mouse.getPosition(), mouse.getColor()));
+			allBrushObjects.push_back(Brush(mouse.getPosition(), mouse.getColor(), mouse.getThickness()));
 		}
 		if (toDraw) {
 			allBrushObjects.back().update(mouse.getPosition());
@@ -166,7 +188,7 @@ void Application::updateAll(sf::RenderWindow& window)
 	if (mouse.getDrawType() == drawType::Rectangle) {
 		if (!toDraw && isLeftButtonPressed) {
 			toDraw = true;
-			allRectObjects.push_back(Rectangle(mouse.getPosition(), mouse.getColor()));
+			allRectObjects.push_back(Rectangle(mouse.getPosition(), mouse.getColor(), mouse.getThickness(), mouse.getAddFillColor()));
 		}
 		if (toDraw) {
 			allRectObjects[allRectObjects.size() - 1].update(mouse.getPosition(), isShiftPressed);
@@ -175,7 +197,7 @@ void Application::updateAll(sf::RenderWindow& window)
 	if (mouse.getDrawType() == drawType::Line) {
 		if (!toDraw && isLeftButtonPressed) {
 			toDraw = true;
-			allLineObjects.push_back(Line(mouse.getPosition(), mouse.getColor()));
+			allLineObjects.push_back(Line(mouse.getPosition(), mouse.getColor(), mouse.getThickness()));
 		}
 		if (toDraw) {
 			allLineObjects[allLineObjects.size() - 1].update(mouse.getPosition());
@@ -184,7 +206,7 @@ void Application::updateAll(sf::RenderWindow& window)
 	if (mouse.getDrawType() == drawType::Circle) {
 		if (!toDraw && isLeftButtonPressed) {
 			toDraw = true;
-			allCircleObjects.push_back(Circle(mouse.getPosition(), mouse.getColor()));
+			allCircleObjects.push_back(Circle(mouse.getPosition(), mouse.getColor(), mouse.getThickness(), mouse.getAddFillColor()));
 		}
 		if (toDraw) {
 			allCircleObjects[allCircleObjects.size() - 1].update(mouse.getPosition(), isShiftPressed);

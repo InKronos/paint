@@ -1,12 +1,15 @@
 #include "Rectangle.h"
 
-Rectangle::Rectangle(sf::Vector2f mousePosition, sf::Color color) : startingPostion(mousePosition)
+Rectangle::Rectangle(sf::Vector2f mousePosition, sf::Color color, int thickness, bool addFillColor) : startingPostion(mousePosition)
 {
 	this->rect.setSize(sf::Vector2f({ 1, 1 }));
 	this->rect.setPosition(sf::Vector2f(mousePosition.x - 5, mousePosition.y - 5));
-	this->rect.setFillColor(color);
-	this->rect.setOutlineThickness(5);
-	this->rect.setOutlineColor(sf::Color::White);
+	if (addFillColor)
+		this->rect.setFillColor(color);
+	else
+		this->rect.setFillColor(sf::Color::Transparent);
+	this->rect.setOutlineThickness(thickness);
+	this->rect.setOutlineColor(color);
 }
 
 Rectangle::~Rectangle()

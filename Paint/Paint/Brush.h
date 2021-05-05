@@ -8,8 +8,9 @@ class Brush :
     std::vector<sf::CircleShape> allCircleObjects;
     sf::Color color;
     sf::Vector2f lastPosition;
+    int thickness;
 public:
-    Brush(sf::Vector2f position,  sf::Color color);
+    Brush(sf::Vector2f position,  sf::Color color, int thickness);
     ~Brush();
 
     void update(sf::Vector2f mousePosition);
