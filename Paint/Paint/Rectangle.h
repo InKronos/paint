@@ -1,8 +1,8 @@
 #pragma once
 #include "stdafx.h"
-#include "SceneObject.h"
+#include "DrawableObject.h"
 
-class Rectangle : public SceneObject
+class Rectangle : public DrawableObject
 {
 private:
 	sf::RectangleShape rect;
@@ -12,6 +12,7 @@ public:
 	~Rectangle();
 
 	void draw(sf::RenderWindow& window);
-	void update(sf::Vector2f mousePosition, bool isShiftPressed);
+	void update(sf::Vector2f mousePosition);
+	void updateWithShift(sf::Vector2f mousePosition);
 };
 

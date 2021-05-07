@@ -164,79 +164,45 @@ void Application::updateAll(sf::RenderWindow& window)
 
 		}
 	}
+	if (!toDraw && isLeftButtonPressed) {
+		toDraw = true;
+		if (mouse.getDrawType() == drawType::Pen)
+			allDrawableObjects.push_back(new Pen(mouse.getPosition(), mouse.getColor()));
+		if (mouse.getDrawType() == drawType::Brush)
+			allDrawableObjects.push_back(new Brush(mouse.getPosition(), mouse.getColor(), mouse.getThickness()));
+		if (mouse.getDrawType() == drawType::Rectangle) 
+			allDrawableObjects.push_back(new Rectangle(mouse.getPosition(), mouse.getColor(), mouse.getThickness(), mouse.getAddFillColor()));
+		if (mouse.getDrawType() == drawType::Line) 
+			allDrawableObjects.push_back(new Line(mouse.getPosition(), mouse.getColor(), mouse.getThickness()));
+		if (mouse.getDrawType() == drawType::Circle) 
+			allDrawableObjects.push_back(new Circle(mouse.getPosition(), mouse.getColor(), mouse.getThickness(), mouse.getAddFillColor()));
+	}
+	if (toDraw) {
+		
+		if (isShiftPressed && (typeid(*allDrawableObjects.back()) != typeid(Rectangle) || typeid(*allDrawableObjects.back()) != typeid(Circle))){
+			if (typeid(*allDrawableObjects.back()) != typeid(Rectangle)) {
+				Rectangle* rectToUpdate = (Rectangle*)allDrawableObjects.back();
+				rectToUpdate->updateWithShift(mouse.getPosition());
+			}
+			else if (typeid(*allDrawableObjects.back()) != typeid(Circle)) {
+				Circle* circleToUpdate = (Circle*)allDrawableObjects.back();
+				circleToUpdate->updateWithShift(mouse.getPosition());
+			}
+		}
+		else
+			allDrawableObjects.back()->update(mouse.getPosition());
+	}
 	
-	if (mouse.getDrawType() == drawType::Pen)
-	{
-		if (!toDraw && isLeftButtonPressed) {
-			toDraw = true;
-			allPenObjects.push_back(Pen(mouse.getPosition(), mouse.getColor()));
-		}
-		if (toDraw) {
-			allPenObjects.back().update(mouse.getPosition());
-		}
-	}
-	if (mouse.getDrawType() == drawType::Brush)
-	{
-		if (!toDraw && isLeftButtonPressed) {
-			toDraw = true;
-			allBrushObjects.push_back(Brush(mouse.getPosition(), mouse.getColor(), mouse.getThickness()));
-		}
-		if (toDraw) {
-			allBrushObjects.back().update(mouse.getPosition());
-		}
-	}
-	if (mouse.getDrawType() == drawType::Rectangle) {
-		if (!toDraw && isLeftButtonPressed) {
-			toDraw = true;
-			allRectObjects.push_back(Rectangle(mouse.getPosition(), mouse.getColor(), mouse.getThickness(), mouse.getAddFillColor()));
-		}
-		if (toDraw) {
-			allRectObjects[allRectObjects.size() - 1].update(mouse.getPosition(), isShiftPressed);
-		}
-	}
-	if (mouse.getDrawType() == drawType::Line) {
-		if (!toDraw && isLeftButtonPressed) {
-			toDraw = true;
-			allLineObjects.push_back(Line(mouse.getPosition(), mouse.getColor(), mouse.getThickness()));
-		}
-		if (toDraw) {
-			allLineObjects[allLineObjects.size() - 1].update(mouse.getPosition());
-		}
-	}
-	if (mouse.getDrawType() == drawType::Circle) {
-		if (!toDraw && isLeftButtonPressed) {
-			toDraw = true;
-			allCircleObjects.push_back(Circle(mouse.getPosition(), mouse.getColor(), mouse.getThickness(), mouse.getAddFillColor()));
-		}
-		if (toDraw) {
-			allCircleObjects[allCircleObjects.size() - 1].update(mouse.getPosition(), isShiftPressed);
-		}
-	}
 	
 }
 
 void Application::drawAll(sf::RenderWindow& window)
 {
-	for (auto i = 0; i < allPenObjects.size(); i++)
+	for (auto i = 0; i < allDrawableObjects.size(); i++)
 	{
-		allPenObjects[i].draw(window);
+		allDrawableObjects[i]->draw(window);
 	}
-	for (auto i = 0; i < allRectObjects.size(); i++)
-	{
-		allRectObjects[i].draw(window);
-	}
-	for (auto i = 0; i < allLineObjects.size(); i++)
-	{
-		allLineObjects[i].draw(window);
-	}
-	for (auto i = 0; i < allCircleObjects.size(); i++)
-	{
-		allCircleObjects[i].draw(window);
-	}
-	for (auto i = 0; i < allBrushObjects.size(); i++)
-	{
-		allBrushObjects[i].draw(window);
-	}
+	
 	interfaceObject.draw(window);
 	for (auto i = 0; i < allBlockObject.size(); i++)
 	{

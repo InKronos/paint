@@ -1,12 +1,11 @@
 #pragma once
-#include "SceneObject.h"
+#include "DrawableObject.h"
 #include "stdafx.h"
-#include <SFML/Graphics.hpp>
 
 
 class SceneObject;
 
-class Pen : public SceneObject
+class Pen : public DrawableObject
 {
 	std::vector<sf::VertexArray> allPenObjects;
 	sf::Vector2f lastposition;

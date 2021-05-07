@@ -9,6 +9,8 @@
 #include "Line.h"
 #include "Circle.h"
 #include "Brush.h"
+#include "DrawableObject.h"
+
 
 class Pen;
 class SceneObject;
@@ -31,11 +33,8 @@ public:
 	bool RectDrawed;
 	sf::Vector2f lastPosition;
 	std::vector<BaseBlock*> allBlockObject = {};
-	std::vector<Pen> allPenObjects = {};
-	std::vector<Rectangle> allRectObjects = {};
-	std::vector<Line> allLineObjects = {};
-	std::vector<Circle> allCircleObjects = {};
-	std::vector<Brush> allBrushObjects = {};
+
+	std::vector<DrawableObject*> allDrawableObjects = {};
 	//List list;
 private:
 	void events();

@@ -8,7 +8,7 @@ Rectangle::Rectangle(sf::Vector2f mousePosition, sf::Color color, int thickness,
 		this->rect.setFillColor(color);
 	else
 		this->rect.setFillColor(sf::Color::Transparent);
-	this->rect.setOutlineThickness(thickness);
+	this->rect.setOutlineThickness(-thickness);
 	this->rect.setOutlineColor(color);
 }
 
@@ -21,39 +21,42 @@ void Rectangle::draw(sf::RenderWindow& window)
 	window.draw(this->rect);
 }
 
-void Rectangle::update(sf::Vector2f mousePosition, bool isShiftPressed)
+void Rectangle::update(sf::Vector2f mousePosition)
 {
-	if (isShiftPressed) {
-		if (mousePosition.x - this->startingPostion.x > 0) {
-			if (mousePosition.y - this->startingPostion.y > 0) {
-				if (mousePosition.y - this->startingPostion.y > mousePosition.x - this->startingPostion.x) 
-					this->rect.setSize({ mousePosition.y - this->startingPostion.y, mousePosition.y - this->startingPostion.y });
-				else
-					this->rect.setSize({ mousePosition.x - this->startingPostion.x, mousePosition.x - this->startingPostion.x });
-			}
-			else {
-				if (-(mousePosition.y - this->startingPostion.y) > mousePosition.x - this->startingPostion.x)
-					this->rect.setSize({ -(mousePosition.y - this->startingPostion.y), mousePosition.y - this->startingPostion.y });
-				else
-					this->rect.setSize({ mousePosition.x - this->startingPostion.x, -(mousePosition.x - this->startingPostion.x) });
-			}
-		}
-		else {
-			if (mousePosition.y - this->startingPostion.y > 0) {
-				if (mousePosition.y - this->startingPostion.y > -(mousePosition.x - this->startingPostion.x))
-					this->rect.setSize({ -(mousePosition.y - this->startingPostion.y), mousePosition.y - this->startingPostion.y });
-				else
-					this->rect.setSize({ mousePosition.x - this->startingPostion.x, -(mousePosition.x - this->startingPostion.x) });
-			}
-			if (mousePosition.y - this->startingPostion.y < 0) {
-				if (-(mousePosition.y - this->startingPostion.y) > -(mousePosition.x - this->startingPostion.x))
-					this->rect.setSize({ mousePosition.y - this->startingPostion.y, mousePosition.y - this->startingPostion.y });
-				else
-					this->rect.setSize({ mousePosition.x - this->startingPostion.x, -(mousePosition.x - this->startingPostion.x) });
-			}
-		}
-	}
-	else
-		this->rect.setSize({ mousePosition.x - this->startingPostion.x, mousePosition.y - this->startingPostion.y });
+	this->rect.setSize({ mousePosition.x - this->startingPostion.x, mousePosition.y - this->startingPostion.y });
 	//std::cout << "Wielkosc X: " << mousePosition.x - this->startingPostion.x << " Wielkoœæ Y: " <<
 }
+
+void Rectangle::updateWithShift(sf::Vector2f mousePosition)
+{
+	if (mousePosition.x - this->startingPostion.x > 0) {
+		if (mousePosition.y - this->startingPostion.y > 0) {
+			if (mousePosition.y - this->startingPostion.y > mousePosition.x - this->startingPostion.x)
+				this->rect.setSize({ mousePosition.y - this->startingPostion.y, mousePosition.y - this->startingPostion.y });
+			else
+				this->rect.setSize({ mousePosition.x - this->startingPostion.x, mousePosition.x - this->startingPostion.x });
+		}
+		else {
+			if (-(mousePosition.y - this->startingPostion.y) > mousePosition.x - this->startingPostion.x)
+				this->rect.setSize({ -(mousePosition.y - this->startingPostion.y), mousePosition.y - this->startingPostion.y });
+			else
+				this->rect.setSize({ mousePosition.x - this->startingPostion.x, -(mousePosition.x - this->startingPostion.x) });
+		}
+	}
+	else {
+		if (mousePosition.y - this->startingPostion.y > 0) {
+			if (mousePosition.y - this->startingPostion.y > -(mousePosition.x - this->startingPostion.x))
+				this->rect.setSize({ -(mousePosition.y - this->startingPostion.y), mousePosition.y - this->startingPostion.y });
+			else
+				this->rect.setSize({ mousePosition.x - this->startingPostion.x, -(mousePosition.x - this->startingPostion.x) });
+		}
+		if (mousePosition.y - this->startingPostion.y < 0) {
+			if (-(mousePosition.y - this->startingPostion.y) > -(mousePosition.x - this->startingPostion.x))
+				this->rect.setSize({ mousePosition.y - this->startingPostion.y, mousePosition.y - this->startingPostion.y });
+			else
+				this->rect.setSize({ mousePosition.x - this->startingPostion.x, -(mousePosition.x - this->startingPostion.x) });
+		}
+	}
+}
+
+

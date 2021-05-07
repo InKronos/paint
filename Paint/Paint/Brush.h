@@ -1,8 +1,8 @@
 #pragma once
-#include "SceneObject.h"
+#include "DrawableObject.h"
 #include "Line.h"
 class Brush :
-    public SceneObject
+    public DrawableObject
 {
     std::vector<Line> allBetweenCircle;
     std::vector<sf::CircleShape> allCircleObjects;

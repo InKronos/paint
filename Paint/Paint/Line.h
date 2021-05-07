@@ -1,7 +1,7 @@
 #pragma once
-#include "SceneObject.h"
+#include "DrawableObject.h"
 class Line :
-    public SceneObject
+    public DrawableObject
 {
     sf::RectangleShape line;
     sf::Vector2f startingPosition;
