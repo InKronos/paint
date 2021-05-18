@@ -11,6 +11,7 @@ private:
 public:
 	Block(sf::Vector2f position, sf::Vector2f size, sf::Color color, T uniqueAttribute_);
 	~Block();
+	
 	void setUniqueAttribute(T uniqueAttribute_);
 	T getUniqueAttribute();
 };

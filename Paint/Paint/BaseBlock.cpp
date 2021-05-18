@@ -13,6 +13,11 @@ BaseBlock::~BaseBlock()
 {
 }
 
+void BaseBlock::setTexture(sf::Texture &texture)
+{
+	this->shape.setTexture(&texture);
+}
+
 bool BaseBlock::isClicked(sf::Vector2f mousePosition)
 {
 	if (mousePosition.x > this->position.x && mousePosition.y > this->position.y && mousePosition.x < (this->position.x + this->size.x) && mousePosition.y < (this->position.y + this->size.y))

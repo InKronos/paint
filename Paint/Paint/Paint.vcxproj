@@ -159,7 +159,6 @@
     <ClCompile Include="DrawableObject.cpp" />
     <ClCompile Include="Interface.cpp" />
     <ClCompile Include="Line.cpp" />
-    <ClCompile Include="List.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Pen.cpp" />
@@ -176,7 +175,6 @@
     <ClInclude Include="EllipseShape.h" />
     <ClInclude Include="Interface.h" />
     <ClInclude Include="Line.h" />
-    <ClInclude Include="List.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Pen.h" />
     <ClInclude Include="Rectangle.h" />
