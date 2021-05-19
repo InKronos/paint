@@ -1,6 +1,11 @@
+/**
+ * @file class EllipseShape.h
+ * @brief plik zawiekaj¹cy klase EllipseShape która dziedziczy od sf::Shape, jest specjan¹ klas¹ która pozwala na rysowanie elipsy
+ */
 #pragma once
 #include "stdafx.h"
 
+ /** Klasa obiektu EllipseShape */
 class EllipseShape : public sf::Shape
 {
 public:

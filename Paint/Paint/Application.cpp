@@ -3,7 +3,6 @@
 
 
 Application::Application(const int& windowWidth, const int& windowHeight, const std::string& filename)
-	:  lastPosition({0, 0})
 {
 	this->filename = filename;
 
@@ -193,7 +192,6 @@ void Application::saveFile()
 	if (!toDraw) {
 		if ((isSPressed && isControlPressed) || doSave) {
 			sf::Texture texture;
-			sf::Vector2f GrayBlockSize = allBlockObject[0]->getSize();
 			texture.create(window.getSize().x, window.getSize().y);
 			texture.update(window);
 			sf::Image image2 = texture.copyToImage();

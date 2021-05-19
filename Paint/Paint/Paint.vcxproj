@@ -161,7 +161,6 @@
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Pen.cpp" />
     <ClCompile Include="Rectangle.cpp" />
-    <ClCompile Include="SceneObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />

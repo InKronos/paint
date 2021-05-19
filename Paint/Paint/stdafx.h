@@ -1,9 +1,10 @@
+/**
+ * @file stdafx.h
+ * @brief plik zawiekaj¹cy u¿ywane biblioteki
+ */
 #pragma once
 #include <iostream>
 
-#define _CRTDBG_MAP_ALLOC
-#include <stdlib.h>
-#include <crtdbg.h>
 
 #include <SFML/Graphics.hpp>
 #include <vector>
