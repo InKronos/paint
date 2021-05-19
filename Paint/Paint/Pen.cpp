@@ -12,7 +12,7 @@ Pen::Pen(sf::Vector2f position, sf::Color color)
 }
 Pen::~Pen()
 {
-
+	allPenObjects.clear();
 }
 
 void Pen::update(sf::Vector2f mousePosition)

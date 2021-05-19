@@ -14,6 +14,7 @@ public:
 	bool isClicked(sf::Vector2f mousePosition);
 	void setOutLineColor();
 	void deleteOutLineColor();
+	sf::Vector2f getSize();
 	void draw(sf::RenderWindow& window);
 };
 

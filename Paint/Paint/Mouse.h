@@ -15,6 +15,7 @@ class Mouse
 {
 private:
 	sf::Vector2f position;
+	sf::CircleShape MouseImage;
 	drawType type;
 	sf::Color color;
 	int thickness;
@@ -33,7 +34,7 @@ public:
 	int getThickness();
 	void setAddFillColor(bool fillColor);
 	bool getAddFillColor();
-	
+	void draw(sf::RenderWindow& window);
 
 };
 

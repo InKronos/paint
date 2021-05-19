@@ -5,6 +5,8 @@ Mouse::Mouse()
 {
 	sf::Vector2i mousePosition = sf::Mouse::getPosition();
 	this->position = sf::Vector2f(0, 0);
+	MouseImage.setFillColor(sf::Color::Color(255, 165, 0));
+	MouseImage.setRadius(1);
 }
 
 Mouse::~Mouse()
@@ -15,6 +17,7 @@ void Mouse::update(sf::RenderWindow& window)
 {
 	sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 	this->position = sf::Vector2f(mousePosition.x, mousePosition.y);
+	this->MouseImage.setPosition(sf::Vector2f(mousePosition.x - 1, mousePosition.y - 1));
 }
 
 sf::Vector2f Mouse::getPosition()
@@ -64,6 +67,11 @@ void Mouse::setAddFillColor(bool fillColor)
 bool Mouse::getAddFillColor()
 {
 	return this->addFillColor;
+}
+
+void Mouse::draw(sf::RenderWindow& window)
+{
+	window.draw(this->MouseImage);
 }
 
 

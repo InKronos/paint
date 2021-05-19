@@ -9,5 +9,6 @@ int main()
     std::cin >> filename;
     Application app(800, 400, filename);
     app.run();
+    _CrtDumpMemoryLeaks();
     return 0;
 }

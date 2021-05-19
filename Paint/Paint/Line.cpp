@@ -32,6 +32,7 @@ void Line::update(sf::Vector2f mousePosition)
 	}
 	
 	if (mousePosition.x - startingPosition.x < 0 && mousePosition.y - startingPosition.y <= 0) {
+		line.setPosition(sf::Vector2f(startingPosition.x, startingPosition.y - (this->thickness/2)));
 		if (degrees == 0)
 			degrees = -90;
 		else
@@ -39,13 +40,17 @@ void Line::update(sf::Vector2f mousePosition)
 		degrees *= -1;
 	}
 	else if ((mousePosition.x - startingPosition.x) > 0 && (mousePosition.y - startingPosition.y) >= 0) {
+		line.setPosition(sf::Vector2f(startingPosition.x, startingPosition.y + (this->thickness / 2)));
 		if (degrees == 0)
 			degrees = 90;
 		degrees *= -1;
 	}
 	if (mousePosition.x - startingPosition.x >= 0 && mousePosition.y - startingPosition.y < 0) {
-
+		line.setPosition(sf::Vector2f(startingPosition.x, startingPosition.y + (this->thickness / 2)));
 		degrees += 180;
+	}
+	if (mousePosition.x - startingPosition.x <= 0 && mousePosition.y - startingPosition.y > 0) {
+		line.setPosition(sf::Vector2f(startingPosition.x, startingPosition.y - (this->thickness / 2)));
 	}
 	line.setRotation(degrees);
 }

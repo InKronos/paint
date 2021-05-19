@@ -35,6 +35,11 @@ void BaseBlock::deleteOutLineColor()
 	this->shape.setOutlineColor(this->shape.getFillColor());
 }
 
+sf::Vector2f BaseBlock::getSize()
+{
+	return size;
+}
+
 void BaseBlock::draw(sf::RenderWindow& window)
 {
 	
