@@ -17,7 +17,17 @@ void Mouse::update(sf::RenderWindow& window)
 {
 	sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 	this->position = sf::Vector2f(mousePosition.x, mousePosition.y);
-	this->MouseImage.setPosition(sf::Vector2f(mousePosition.x - 1, mousePosition.y - 1));
+	
+	if (this->type != drawType::Pen) {
+		this->MouseImage.setPosition(sf::Vector2f(mousePosition.x - (this->thickness / 2), mousePosition.y - (this->thickness / 2)));
+		this->MouseImage.setRadius(this->thickness / 2);
+	}
+		
+	else {
+		this->MouseImage.setPosition(sf::Vector2f(mousePosition.x - 1, mousePosition.y - 1));
+		this->MouseImage.setRadius(1);
+	}
+		
 }
 
 sf::Vector2f Mouse::getPosition()

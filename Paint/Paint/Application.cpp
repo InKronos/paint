@@ -44,7 +44,6 @@ void Application::run()
 		updateAll(window);
         window.clear();
 		drawAll(window);
-		window.draw(thicknessText);
         window.display();
     }
 
@@ -72,6 +71,7 @@ void Application::events()
 		{
 			if (event.key.code == sf::Keyboard::LShift) {
 				isShiftPressed = true;
+				return;
 			}
 			if (event.key.code == sf::Keyboard::LControl) {
 				isControlPressed = true;
@@ -146,9 +146,8 @@ void Application::drawAll(sf::RenderWindow& window)
 	{
 		allBlockObject[i]->draw(window);
 	}
-	mouse.draw(window);
-	
-	
+	window.draw(thicknessText);
+	mouse.draw(window);	
 }
 
 void Application::updateClipboard()
@@ -200,8 +199,8 @@ void Application::saveFile()
 			image.copy(image2, 0, 0, sf::IntRect(0, (window.getSize().y / 8), window.getSize().x, window.getSize().y));
 			image.saveToFile(std::string(this->filename + ".png"));
 			doSave = false;
-			toDraw = true;
 			window.setTitle(sf::String("Paint: your file name is " + filename + ".png"));
+			std::cout << "Saved!" << std::endl;
 		}
 	}
 }
@@ -228,6 +227,9 @@ void Application::createEverything()
 	allTextures[8].loadFromFile("Images/clear.png");
 	allTextures[9].loadFromFile("Images/save.png");
 	allBlockObject.push_back(new Block<std::string>(sf::Vector2f({ 0, 0 }), sf::Vector2f({ 800, 50 }), sf::Color::Color(100, 100, 100), "Interface gray block to check if mouse is clicek on it"));
+	allBlockObject.back()->setOutLineColor();
+	allBlockObject.push_back(new Block<sf::Color>(sf::Vector2f({ 560, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::White, sf::Color::White));
+	allBlockObject.push_back(new Block<sf::Color>(sf::Vector2f({ 600, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Black, sf::Color::Black));
 	allBlockObject.push_back(new Block<sf::Color>(sf::Vector2f({ 640, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Yellow, sf::Color::Yellow));
 	allBlockObject.push_back(new Block<sf::Color>(sf::Vector2f({ 680, 10 }), sf::Vector2f({ 30, 30 }), sf::Color::Blue, sf::Color::Blue));
 	allBlockObject.back()->setOutLineColor();
