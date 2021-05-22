@@ -1,5 +1,5 @@
 /**
- * @file class Mouse.h
+ * @file Mouse.h
  * @brief plik zawiekaj¹cy klase Mouse która obs³uguje myszke, plik równie¿ zawiera enum class drawType 
  */
 #pragma once

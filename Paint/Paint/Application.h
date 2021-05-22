@@ -1,3 +1,8 @@
+/**
+ * @file Application.h
+ * @brief plik zawiekaj¹cy klase Application
+ */
+
 #pragma once
 #include "stdafx.h"
 #include "Pen.h"
@@ -11,7 +16,7 @@
 #include "DrawableObject.h"
 
 
-
+ /** Klasa obiektu aplikacji*/
 class Application
 {
 private:
@@ -62,7 +67,6 @@ private:
 	/** Funkcja która rysuje wszystkie obiekty na oknie  
 	 * @param window okno do rysowania
 	 */
-
 	void drawAll(sf::RenderWindow& window);
 	/** Funkcja aktualizuj¹ca schowek */
 	void updateClipboard();

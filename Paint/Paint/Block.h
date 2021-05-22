@@ -1,5 +1,5 @@
 /**
- * @file class Block.h
+ * @file Block.h
  * @brief plik zawiekaj¹cy klase Block która dziedziczy od BaseBlock, jest specjan¹ szablonem bloków
  */
 #pragma once

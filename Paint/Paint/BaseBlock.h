@@ -1,5 +1,5 @@
 /**
- * @file class Block.h
+ * @file BaseBlock.h
  * @brief plik zawiekaj¹cy klase Block która dziedziczy od SceneObject, jest baz¹ dla szablonu bloków
  */
 #pragma once

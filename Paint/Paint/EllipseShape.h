@@ -1,5 +1,5 @@
 /**
- * @file class EllipseShape.h
+ * @file EllipseShape.h
  * @brief plik zawiekaj¹cy klase EllipseShape która dziedziczy od sf::Shape, jest specjan¹ klas¹ która pozwala na rysowanie elipsy
  */
 #pragma once
